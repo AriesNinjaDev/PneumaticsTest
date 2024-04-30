@@ -8,6 +8,7 @@ import edu.wpi.first.math.filter.Debouncer.DebounceType;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -27,12 +28,12 @@ public class RobotContainer {
         new Trigger(controller.b())
                 .onTrue(new InstantCommand(() -> testSubsystem.toggleSole())
                         .andThen(new WaitCommand(testSubsystem.waitTime)
-                                .andThen(new InstantCommand(() -> testSubsystem.toggleSole()))))
-                .debounce(2, DebounceType.kFalling);
-        new Trigger(controller.x()).onTrue(new InstantCommand(() -> testSubsystem.increaseTimeBig()));
-        new Trigger(controller.y()).onTrue(new InstantCommand(() -> testSubsystem.decreaseTimeBig()));
-        new Trigger(controller.leftBumper()).onTrue(new InstantCommand(() -> testSubsystem.decreaseTimeSmall()));
-        new Trigger(controller.rightBumper()).onTrue(new InstantCommand(() -> testSubsystem.increaseTimeSmall()));
+                                .andThen(new InstantCommand(() -> testSubsystem.closeSole()))))
+                .debounce(2.0, DebounceType.kFalling);
+        new Trigger(controller.y()).onTrue(new InstantCommand(() -> testSubsystem.increaseTimeBig()));
+        new Trigger(controller.x()).onTrue(new InstantCommand(() -> testSubsystem.decreaseTimeBig()));
+        new Trigger(controller.rightBumper()).onTrue(new InstantCommand(() -> testSubsystem.decreaseTimeSmall()));
+        new Trigger(controller.leftBumper()).onTrue(new InstantCommand(() -> testSubsystem.increaseTimeSmall()));
     }
 
     public Command getAutonomousCommand() {

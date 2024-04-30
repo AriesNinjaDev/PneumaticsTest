@@ -8,13 +8,16 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class TestSubsystem extends SubsystemBase {
     Compressor compressor = new Compressor(30, PneumaticsModuleType.CTREPCM);
     Solenoid solenoid = new Solenoid(30, PneumaticsModuleType.CTREPCM, 0);
-    public double waitTime = 1.0;
+    public double waitTime = 0.1;
 
     public TestSubsystem() {
         solenoid.set(false);
+        compressor.disable();
+        System.out.println(waitTime);
     }
 
     public void toggleComp() {
+        System.out.println("Toggled Compressor");
         if (compressor.isEnabled()) {
             compressor.disable();
         } else {
@@ -23,6 +26,7 @@ public class TestSubsystem extends SubsystemBase {
     }
 
     public void toggleSole() {
+        System.out.println("Toggled Sole");
         if (solenoid.get()) {
             solenoid.set(false);
         } else {
