@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -26,9 +27,9 @@ public class RobotContainer {
         new Trigger(controller.a()).onTrue(new InstantCommand(() -> testSubsystem.toggleComp())).debounce(1,
                 DebounceType.kFalling);
         new Trigger(controller.b())
-                .onTrue(new InstantCommand(() -> testSubsystem.toggleSole())
-                        .andThen(new WaitCommand(testSubsystem.waitTime)
-                                .andThen(new InstantCommand(() -> testSubsystem.closeSole()))))
+                .onTrue(new InstantCommand(() -> testSubsystem.openSole())
+                        .andThen(new WaitCommand(testSubsystem.waitTime))
+                        .andThen(new InstantCommand(() -> testSubsystem.closeSole())))
                 .debounce(2.0, DebounceType.kFalling);
         new Trigger(controller.y()).onTrue(new InstantCommand(() -> testSubsystem.increaseTimeBig()));
         new Trigger(controller.x()).onTrue(new InstantCommand(() -> testSubsystem.decreaseTimeBig()));

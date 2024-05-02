@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class TestSubsystem extends SubsystemBase {
     Compressor compressor = new Compressor(30, PneumaticsModuleType.CTREPCM);
     Solenoid solenoid = new Solenoid(30, PneumaticsModuleType.CTREPCM, 0);
-    public double waitTime = 0.1;
+    public double waitTime = 5.0;
 
     public TestSubsystem() {
         solenoid.set(false);
@@ -32,6 +32,10 @@ public class TestSubsystem extends SubsystemBase {
         } else {
             solenoid.set(true);
         }
+    }
+
+    public void openSole() {
+        solenoid.set(true);
     }
 
     public void closeSole() {
